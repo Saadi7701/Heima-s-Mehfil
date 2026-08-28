@@ -65,7 +65,7 @@ export default function Checkout() {
         >
           <h2 className="text-4xl font-cinzel text-mehfil-gold mb-4">Your Mehfil has been reserved.</h2>
           <p className="text-mehfil-ivory/80 font-serif mb-8">
-            Order confirmed. Your order ID is <span className="text-mehfil-gold font-bold">#{orderId?.split('-')[0].toUpperCase()}</span>.
+            Order confirmed. Your order ID is <span className="text-mehfil-gold font-bold">{orderId?.startsWith('MEHFIL-') ? orderId : `#${orderId?.slice(0, 8)?.toUpperCase()}`}</span>.
           </p>
           <button onClick={() => navigate('/')} className="btn-primary w-full">Return Home</button>
         </motion.div>

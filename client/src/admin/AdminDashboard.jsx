@@ -196,8 +196,8 @@ export default function AdminDashboard() {
               className="px-6 py-4 flex items-center justify-between hover:bg-white/2 transition-colors"
             >
               <div className="flex items-center space-x-4">
-                <div className="w-8 h-8 rounded-lg bg-mehfil-gold/10 flex items-center justify-center text-mehfil-gold text-xs font-cinzel">
-                  #{order.id.split('-')[0].toUpperCase().slice(0, 4)}
+                <div className="w-10 h-8 px-2 rounded-lg bg-mehfil-gold/10 flex items-center justify-center text-mehfil-gold text-[10px] font-mono">
+                  #{order.id?.startsWith('MEHFIL-') ? order.id.replace('MEHFIL-', '') : order.id?.slice(0, 6)?.toUpperCase()}
                 </div>
                 <div>
                   <div className="text-mehfil-ivory text-sm font-serif">{order.customer_name || order.delivery_address?.split(',')[0] || 'Guest'}</div>
