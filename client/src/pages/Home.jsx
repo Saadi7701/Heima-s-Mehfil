@@ -177,6 +177,14 @@ export default function Home() {
   const videoRef = useRef(null);
   const [videoEnded, setVideoEnded] = useState(false);
 
+  useEffect(() => {
+    // Fallback timer: ensure buttons reveal after 4 seconds even if mobile browser delays or suppresses video onEnded
+    const timer = setTimeout(() => {
+      setVideoEnded(true);
+    }, 4200);
+    return () => clearTimeout(timer);
+  }, []);
+
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);

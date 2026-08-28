@@ -4,9 +4,22 @@ import { Search, Loader2, ShoppingCart } from 'lucide-react';
 import { fetchMenuItems, fetchCategories } from '../lib/api';
 import { useCart } from '../context/CartContext';
 
+const fallbackCategories = ['All', 'Starters', 'Mains', 'BBQ & Karahi', 'Desserts', 'Beverages'];
+
+const fallbackMenuItems = [
+  { id: 1, name: 'Saffron Mutton Biryani', price: 2500, category: 'Mains', description: 'Aromatic basmati with tender slow-cooked mutton & premium saffron', image_url: 'https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&auto=format&fit=crop', is_spicy: true },
+  { id: 2, name: 'Reshmi Kebab', price: 1200, category: 'BBQ & Karahi', description: 'Silky minced chicken grilled over charcoal to perfection', image_url: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&auto=format&fit=crop' },
+  { id: 3, name: 'Nihari', price: 2200, category: 'Mains', description: 'Slow-cooked overnight beef stew, garnished with ginger & green chilies', image_url: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&auto=format&fit=crop', is_spicy: true },
+  { id: 4, name: 'Chicken Karahi', price: 1900, category: 'BBQ & Karahi', description: 'Classic wok-tossed chicken in rich tomato & green chili gravy', image_url: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=800&auto=format&fit=crop', is_spicy: true },
+  { id: 5, name: 'Shahi Tukda', price: 800, category: 'Desserts', description: 'Rich bread pudding soaked in saffron milk, topped with rabri & nuts', image_url: 'https://images.unsplash.com/photo-1590137876181-2a5a7e340308?w=800&auto=format&fit=crop', is_vegetarian: true },
+  { id: 6, name: 'Kashmiri Chai', price: 600, category: 'Beverages', description: 'Delicate pink tea brewed with green leaves, cream & crushed pistachios', image_url: 'https://images.unsplash.com/photo-1544025162-811114215563?w=800&auto=format&fit=crop', is_vegetarian: true },
+  { id: 7, name: 'Dahi Puri', price: 650, category: 'Starters', description: 'Crispy puris filled with spiced potatoes, sweet yogurt, and tangy chutney', image_url: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop', is_vegetarian: true },
+  { id: 8, name: 'Mutton Seekh Kebab', price: 1650, category: 'BBQ & Karahi', description: 'Juicy spiced mutton mince skewers seared over glowing charcoal', image_url: 'https://images.unsplash.com/photo-1544025162-811114215563?w=800&auto=format&fit=crop', is_spicy: true },
+];
+
 export default function Menu() {
-  const [categories, setCategories] = useState(['All']);
-  const [menuItems, setMenuItems] = useState([]);
+  const [categories, setCategories] = useState(fallbackCategories);
+  const [menuItems, setMenuItems] = useState(fallbackMenuItems);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
@@ -20,10 +33,16 @@ export default function Menu() {
           fetchMenuItems()
         ]);
         
-        setCategories(['All', ...cats.map(c => c.name)]);
-        setMenuItems(items);
+        if (cats && Array.isArray(cats) && cats.length > 0) {
+          setCategories(['All', ...cats.map(c => c.name)]);
+        }
+        if (items && Array.isArray(items) && items.length > 0) {
+          setMenuItems(items);
+        }
       } catch (error) {
-        console.error("Failed to load menu:", error);
+        console.warn("API offline or unreachable, using fallback menu items:", error);
+        setCategories(fallbackCategories);
+        setMenuItems(fallbackMenuItems);
       } finally {
         setLoading(false);
       }
