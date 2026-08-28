@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@theme {
+  --color-mehfil-burgundy: #4A0404;
+  --color-mehfil-maroon: #600505;
+  --color-mehfil-gold: #D4AF37;
+  --color-mehfil-gold-light: #F3E5AB;
+  --color-mehfil-ivory: #FFFFF0;
+  --color-mehfil-cream: #FFFDD0;
+  --color-mehfil-charcoal: #36454F;
+  --color-mehfil-black: #1a1a1a;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-cinzel: 'Cinzel', serif;
+
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+  --animate-slow-zoom: slowZoom 10s ease-in-out infinite alternate;
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-mehfil-black text-mehfil-ivory font-sans antialiased overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-mehfil-gold tracking-wide;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-mehfil-burgundy/40 backdrop-blur-md border border-mehfil-gold/20 shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-3 bg-mehfil-gold text-mehfil-black font-medium tracking-widest uppercase transition-all duration-300 hover:bg-mehfil-gold-light hover:shadow-xl;
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 bg-transparent border border-mehfil-gold text-mehfil-gold font-medium tracking-widest uppercase transition-all duration-300 hover:bg-mehfil-gold/10 hover:shadow-lg;
+  }
+}
+
+/* Custom Scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-mehfil-black;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-mehfil-burgundy rounded-full border border-mehfil-gold/20;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-mehfil-gold/50;
+}
+
+/* ── Infinite scroll track for rolling cards ── */
+@keyframes scrollTrack {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Announcement bar marquee ── */
+@keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+/* ── Text gradient utility ── */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
