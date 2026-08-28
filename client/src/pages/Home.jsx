@@ -198,11 +198,38 @@ export default function Home() {
     <div className="w-full bg-mehfil-black overflow-x-hidden">
 
       {/* ── 1. HERO SECTION ── */}
-      <section ref={heroRef} className="relative h-screen w-full flex items-end justify-start overflow-hidden bg-black">
+      <section ref={heroRef} className="relative h-screen w-full flex items-end justify-start overflow-hidden bg-gradient-to-b from-[#220303] via-[#380505] to-mehfil-black">
         
+        {/* Animated Sparkling Gold Stars */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+          {[...Array(35)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-mehfil-gold shadow-[0_0_10px_rgba(212,175,55,0.9)]"
+              style={{
+                width: `${Math.random() * 3 + 1.5}px`,
+                height: `${Math.random() * 3 + 1.5}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -35, 0],
+                opacity: [0.1, 1, 0.1],
+                scale: [0.7, 1.6, 0.7],
+              }}
+              transition={{
+                duration: 2.5 + Math.random() * 3.5,
+                delay: Math.random() * 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
+
         {/* Full-screen video background (plays once, stops at last frame) */}
         <motion.div
-          className="absolute inset-0 z-0 flex items-center justify-center bg-black"
+          className="absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-b from-[#220303] via-[#380505] to-mehfil-black"
           style={{ scale: heroScale, y: heroY }}
         >
           <video
@@ -212,14 +239,14 @@ export default function Home() {
             muted
             playsInline
             onEnded={() => setVideoEnded(true)}
-            className="w-full h-full object-contain md:object-cover bg-black"
+            className="w-full h-full object-contain md:object-cover"
           />
         </motion.div>
 
         {/* Bottom gradient — dissolves video into the next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 z-[1] bg-gradient-to-t from-mehfil-black via-mehfil-black/70 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-64 z-[2] bg-gradient-to-t from-mehfil-black via-mehfil-black/80 to-transparent pointer-events-none" />
         {/* Top subtle vignette */}
-        <div className="absolute top-0 left-0 right-0 h-40 z-[1] bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-40 z-[2] bg-gradient-to-b from-[#220303]/80 to-transparent pointer-events-none" />
 
         {/* Hero Content — Buttons positioned lower on left, appearing after video animation ends */}
         <motion.div
