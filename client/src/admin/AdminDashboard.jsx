@@ -122,7 +122,7 @@ export default function AdminDashboard() {
 
       {/* Stats Grid */}
       {stats && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard index={0} icon={ShoppingBag} label="Total Orders" value={stats.totalOrders} sub={`${stats.pendingOrders} pending`} color="bg-mehfil-gold/15 text-mehfil-gold" />
           <StatCard index={1} icon={DollarSign} label="Total Revenue" value={`Rs ${(stats.totalRevenue || 0).toLocaleString()}`} sub="All time" color="bg-green-400/15 text-green-400" />
           <StatCard index={2} icon={Clock} label="Pending Orders" value={stats.pendingOrders} sub={`${stats.completedOrders} completed`} color="bg-orange-400/15 text-orange-400" />

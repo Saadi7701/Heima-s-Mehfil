@@ -114,18 +114,10 @@ export default function Layout() {
                 <Link 
                   to="/reservations" 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="hover:text-mehfil-gold transition-colors pb-2 border-b border-mehfil-gold/10 flex items-center justify-between"
+                  className="hover:text-mehfil-gold transition-colors pb-2 flex items-center justify-between"
                 >
                   <span>Reservations</span>
                   <ArrowRight size={16} className="text-mehfil-gold/50" />
-                </Link>
-                <Link 
-                  to="/admin" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="hover:text-mehfil-gold transition-colors text-mehfil-gold/80 text-sm pt-2 flex items-center justify-between font-cinzel"
-                >
-                  <span>Admin Console</span>
-                  <ArrowRight size={14} className="text-mehfil-gold" />
                 </Link>
               </div>
             </motion.div>
