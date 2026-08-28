@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Star, ChevronDown, Utensils, Clock, MapPin, Phone, ArrowRight } from 'lucide-react';
-import logoVideo from '../assets/MEHFIL_restaurant_banner_animation_202608281523.mp4';
+import logoVideo from '../assets/Creating_brand_animation_video_202608282145_202608282152.mp4';
 
 // ─── Animation Variants ──────────────────────────────────────────────
 const fadeUp = {
@@ -187,7 +187,7 @@ export default function Home() {
     <div className="w-full bg-mehfil-black overflow-x-hidden">
 
       {/* ── 1. HERO SECTION ── */}
-      <section ref={heroRef} className="relative h-screen w-full flex items-end justify-center overflow-hidden bg-black">
+      <section ref={heroRef} className="relative h-screen w-full flex items-end justify-start overflow-hidden bg-black">
         
         {/* Full-screen video background */}
         <motion.div
@@ -209,19 +209,19 @@ export default function Home() {
         {/* Top subtle vignette */}
         <div className="absolute top-0 left-0 right-0 h-40 z-[1] bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
 
-        {/* Hero Content — positioned at bottom */}
+        {/* Hero Content — positioned at bottom left */}
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 text-center px-4 max-w-3xl mx-auto pb-24"
+          className="relative z-10 text-left px-8 md:px-16 lg:px-24 w-full max-w-4xl pb-32"
         >
           <motion.p variants={fadeUp} custom={0} initial="hidden" animate="visible"
-            className="text-lg md:text-xl text-mehfil-ivory/85 font-serif mb-10 leading-relaxed"
+            className="text-lg md:text-xl lg:text-2xl text-mehfil-ivory/90 font-serif mb-10 leading-relaxed max-w-2xl"
           >
             Where every gathering becomes a celebration of flavour, artistry, and the richness of South Asian heritage.
           </motion.p>
 
           <motion.div variants={fadeUp} custom={1} initial="hidden" animate="visible"
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-start gap-4"
           >
             <Link to="/menu" className="btn-primary w-full sm:w-auto text-sm tracking-[0.2em] flex items-center justify-center gap-2">
               Explore Menu <ArrowRight size={16} />
