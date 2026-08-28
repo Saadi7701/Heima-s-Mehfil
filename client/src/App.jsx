@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Checkout from './pages/Checkout';
 import Reservations from './pages/Reservations';
+import Experiences from './pages/Experiences';
 import AdminLayout from './admin/AdminLayout';
 import AdminDashboard from './admin/AdminDashboard';
 import AdminOrders from './admin/AdminOrders';
@@ -20,6 +21,7 @@ function App() {
           <Route path="menu" element={<Menu />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="reservations" element={<Reservations />} />
+          <Route path="experiences" element={<Experiences />} />
         </Route>
 
         {/* ── Admin Routes ── */}

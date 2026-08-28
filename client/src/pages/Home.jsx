@@ -174,6 +174,9 @@ function TestimonialCard({ t, index }) {
 export default function Home() {
   const navigate = useNavigate();
   const heroRef = useRef(null);
+  const videoRef = useRef(null);
+  const [videoEnded, setVideoEnded] = useState(false);
+
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
@@ -189,17 +192,18 @@ export default function Home() {
       {/* ── 1. HERO SECTION ── */}
       <section ref={heroRef} className="relative h-screen w-full flex items-end justify-start overflow-hidden bg-black">
         
-        {/* Full-screen video background */}
+        {/* Full-screen video background (plays once, stops at last frame) */}
         <motion.div
           className="absolute inset-0 z-0"
           style={{ scale: heroScale, y: heroY }}
         >
           <video
+            ref={videoRef}
             src={logoVideo}
             autoPlay
-            loop
             muted
             playsInline
+            onEnded={() => setVideoEnded(true)}
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -209,27 +213,29 @@ export default function Home() {
         {/* Top subtle vignette */}
         <div className="absolute top-0 left-0 right-0 h-40 z-[1] bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
 
-        {/* Hero Content — positioned at bottom left */}
+        {/* Hero Content — Buttons positioned lower on left, appearing after video animation ends */}
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 text-left px-8 md:px-16 lg:px-24 w-full max-w-4xl pb-32"
+          className="relative z-10 text-left px-8 md:px-16 lg:px-24 w-full max-w-4xl pb-16"
         >
-          <motion.p variants={fadeUp} custom={0} initial="hidden" animate="visible"
-            className="text-lg md:text-xl lg:text-2xl text-mehfil-ivory/90 font-serif mb-10 leading-relaxed max-w-2xl"
-          >
-            Where every gathering becomes a celebration of flavour, artistry, and the richness of South Asian heritage.
-          </motion.p>
-
-          <motion.div variants={fadeUp} custom={1} initial="hidden" animate="visible"
-            className="flex flex-col sm:flex-row items-start gap-4"
-          >
-            <Link to="/menu" className="btn-primary w-full sm:w-auto text-sm tracking-[0.2em] flex items-center justify-center gap-2">
-              Explore Menu <ArrowRight size={16} />
-            </Link>
-            <Link to="/reservations" className="btn-outline w-full sm:w-auto text-sm tracking-[0.2em]">
-              Reserve a Table
-            </Link>
-          </motion.div>
+          <AnimatePresence>
+            {videoEnded && (
+              <motion.div
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col sm:flex-row items-start gap-4"
+              >
+                <Link to="/menu" className="btn-primary w-full sm:w-auto text-sm tracking-[0.2em] flex items-center justify-center gap-2 shadow-2xl">
+                  Explore Menu <ArrowRight size={16} />
+                </Link>
+                <Link to="/reservations" className="btn-outline w-full sm:w-auto text-sm tracking-[0.2em] shadow-2xl">
+                  Reserve a Table
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         {/* Scroll indicator */}
