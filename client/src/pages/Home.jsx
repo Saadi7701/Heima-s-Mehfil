@@ -202,7 +202,7 @@ export default function Home() {
         
         {/* Full-screen video background (plays once, stops at last frame) */}
         <motion.div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 flex items-center justify-center bg-black"
           style={{ scale: heroScale, y: heroY }}
         >
           <video
@@ -212,7 +212,7 @@ export default function Home() {
             muted
             playsInline
             onEnded={() => setVideoEnded(true)}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain md:object-cover bg-black"
           />
         </motion.div>
 
@@ -224,7 +224,7 @@ export default function Home() {
         {/* Hero Content — Buttons positioned lower on left, appearing after video animation ends */}
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 text-left px-8 md:px-16 lg:px-24 w-full max-w-4xl pb-16"
+          className="relative z-10 text-left px-6 sm:px-12 md:px-16 lg:px-24 w-full max-w-4xl pb-10 sm:pb-16"
         >
           <AnimatePresence>
             {videoEnded && (
